@@ -10,7 +10,7 @@
     grid-template-columns: 1fr;
     padding: 0;
 
-    @media (min-width: 768px) and (max-width: 992px) {
+    @media (min-width: 768px) and (max-width: 1200px) {
         grid-template-areas: "header ticketOverview"
             "ticketbooking ticketOverview"
             "Faqs Faqs"
@@ -20,7 +20,7 @@
         padding: 32px;
     }
 
-    @media (min-width: 992px){
+    @media (min-width: 1200px){
         grid-template-areas: "header header ticketOverview"
             "ticketbooking ticketbooking ticketOverview"
             "Faqs Faqs Faqs"

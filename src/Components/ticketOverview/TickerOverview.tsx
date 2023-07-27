@@ -71,9 +71,11 @@ const TickerOverview = (ticket: Ticket) => {
       <div className="pax-container">
         <div className="title">Tickets overview</div>
         <div className="pax-details">
-          {ticket.paxTypes.map((paxType) => {
+          {ticket.paxTypes.map((paxType,index) => {
             return (
-              <div className="pax">
+              <div className="pax"
+              key={index}
+              >
                 <div>
                   <div className="type">{paxType.type}</div>
                   <div className="count">({paxType.count})</div>

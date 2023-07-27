@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./TicketBooking.scss";
 import cardIcon from "../../assets/icons/CreditCard.svg";
 import klarnaIcon from "../../assets/icons/Klarna.svg";
+import FormInput from "../formUtilities/FormInput";
 
 type TotalAmount = {
   amount: number;
@@ -54,7 +55,6 @@ const TicketBooking = (total: TotalAmount) => {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
     const { id, value } = e.target;
     setFormdata((prevData) => ({
       ...prevData,
@@ -80,11 +80,43 @@ const TicketBooking = (total: TotalAmount) => {
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     const errorsCopy = { ...errors };
+
+    // Field validation rules
     if (value.trim() === "") {
       errorsCopy[id as keyof FormData] = "This field is required";
     } else {
       errorsCopy[id as keyof FormData] = "";
+
+      // Additional validation for specific fields
+      if (id === "email") {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          errorsCopy.email = "Invalid email format";
+        }
+      } else if (id === "confirmEmail") {
+        if (formdata.email !== formdata.confirmEmail) {
+          errorsCopy.confirmEmail = "Emails do not match";
+        } else {
+          errorsCopy.confirmEmail = "";
+        }
+      } else if (id === "cardNumber") {
+        const cardNumberRegex = /^[0-9]{16}$/;
+        if (!cardNumberRegex.test(value)) {
+          errorsCopy.cardNumber = "Invalid card number";
+        }
+      } else if (id === "expirationDate") {
+        const expirationDateRegex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
+        if (!expirationDateRegex.test(value)) {
+          errorsCopy.expirationDate = "Invalid expiration date (MM/YY)";
+        }
+      } else if (id === "cvv") {
+        const cvvRegex = /^[0-9]{3,4}$/;
+        if (!cvvRegex.test(value)) {
+          errorsCopy.cvv = "Invalid CVV";
+        }
+      }
     }
+
     setErrors(errorsCopy);
 
     const parentElement = e.target.parentNode;
@@ -109,64 +141,44 @@ const TicketBooking = (total: TotalAmount) => {
 
       <form className="form" onSubmit={handleSubmit}>
         <div className="responsive-form">
-          <div className="form-group">
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder=" "
-              value={formdata.name || ""}
-              onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            />
-            <label htmlFor="name">Name</label>
-            {errors.name && <span className="error">{errors.name}</span>}
-          </div>
-          <div className="form-group">
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder=" "
-              value={formdata.email || ""}
-              onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            />
-            <label htmlFor="email">Email</label>
-            {errors.email && <span className="error">{errors.email}</span>}
-          </div>
-          <div className="form-group">
-            <input
-              type="email"
-              id="confirmEmail"
-              name="confirmEmail"
-              placeholder=" "
-              value={formdata.confirmEmail || ""}
-              onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            />
-            <label htmlFor="confirmEmail">Confirm Email</label>
-            {errors.confirmEmail && (
-              <span className="error">{errors.confirmEmail}</span>
-            )}
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              placeholder=" "
-              value={formdata.phone || ""}
-              onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            />
-            <label htmlFor="phone">Phone</label>
-            {errors.phone && <span className="error">{errors.phone}</span>}
-          </div>
+          <FormInput
+            id="name"
+            label="Name"
+            value={formdata.name || ""}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            error={errors.name}
+          />
+          <FormInput
+            id="email"
+            label="Email"
+            value={formdata.email || ""}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            error={errors.email}
+          />
+
+          <FormInput
+            id="confirmEmail"
+            label="Confirm Email"
+            value={formdata.confirmEmail || ""}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            error={errors.confirmEmail}
+          />
+
+          <FormInput
+            id="phone"
+            label="Phone"
+            value={formdata.phone || ""}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            error={errors.phone}
+          />
         </div>
 
         <div className="header">Additional information</div>
@@ -174,22 +186,15 @@ const TicketBooking = (total: TotalAmount) => {
           We need a few more details to complete your reservation.
         </div>
         <div className="responsive-form">
-          <div className="form-group">
-            <input
-              type="text"
-              id="additionalName"
-              name="additionalName"
-              placeholder=" "
-              value={formdata.additionalName || ""}
-              onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            />
-            <label htmlFor="additionalName">Name</label>
-            {errors.additionalName && (
-              <span className="error">{errors.additionalName}</span>
-            )}
-          </div>
+          <FormInput
+            id="additionalName"
+            label="Name"
+            value={formdata.additionalName}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            error={errors.additionalName}
+          />
           <div className="form-group">
             <label htmlFor="selectedOption">DropDown</label>
             <select
@@ -231,77 +236,49 @@ const TicketBooking = (total: TotalAmount) => {
                 onChange={() => setPaymentMethod("card")}
               />
             </div>
-{
-              paymentMethod === "card" ? (
-                <div className="responsive-form">
-                <div className="form-group">
-                  <input
-                    type="text"
-                    id="cardNumber"
-                    name="cardNumber"
-                    placeholder=" "
-                    value={formdata.cardNumber}
-                    onChange={handleChange}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                  />
-                  <label htmlFor="cardNumber">Card Number</label>
-                  {errors.cardNumber && (
-                    <span className="error">{errors.cardNumber}</span>
-                  )}
-                </div>
-  
-                <div className="form-group">
-                  <input
-                    type="text"
-                    id="nameOnCard"
-                    name="nameOnCard"
-                    placeholder=" "
-                    value={formdata.nameOnCard}
-                    onChange={handleChange}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                  />
-                  <label htmlFor="nameOnCard">Name on Card</label>
-                  {errors.nameOnCard && (
-                    <span className="error">{errors.nameOnCard}</span>
-                  )}
-                </div>
-  
-                <div className="form-group">
-                  <input
-                    type="text"
-                    id="expirationDate"
-                    name="expirationDate"
-                    placeholder=" "
-                    value={formdata.expirationDate}
-                    onChange={handleChange}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                  />
-                  <label htmlFor="expirationDate">Expiration Date</label>
-                  {errors.expirationDate && (
-                    <span className="error">{errors.expirationDate}</span>
-                  )}
-                </div>
-  
-                <div className="form-group">
-                  <input
-                    type="text"
-                    id="cvv"
-                    name="cvv"
-                    placeholder=" "
-                    value={formdata.cvv}
-                    onChange={handleChange}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                  />
-                  <label htmlFor="cvv">CVV</label>
-                  {errors.cvv && <span className="error">{errors.cvv}</span>}
-                </div>
+            {paymentMethod === "card" ? (
+              <div className="responsive-form">
+                <FormInput
+                  id="cardNumber"
+                  label="Card Number"
+                  value={formdata.cardNumber}
+                  onChange={handleChange}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  error={errors.cardNumber}
+                />
+
+                <FormInput
+                  id="nameOnCard"
+                  label="Name on Card"
+                  value={formdata.nameOnCard}
+                  onChange={handleChange}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  error={errors.nameOnCard}
+                />
+
+                <FormInput
+                  id="expirationDate"
+                  label="Expiration Date"
+                  value={formdata.expirationDate}
+                  onChange={handleChange}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  error={errors.expirationDate}
+                />
+
+                <FormInput
+                  id="cvv"
+                  label="CVV"
+                  value={formdata.cvv}
+                  onChange={handleChange}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  error={errors.cvv}
+                />
               </div>
-              ):null
-}
+            ) : null}
           </div>
           <div key="klarna" className="payment-option">
             <div

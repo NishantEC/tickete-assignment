@@ -4,13 +4,18 @@
 
     color: #474747;
 
+    label {
+        color: #474747;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+    }
+
     .header {
         font-size: 18px;
         font-weight: 600;
-
         @media (min-width: 600px) {
             font-size: 24px;
-          }
+        }
 
     }
 
@@ -26,9 +31,11 @@
 form {
     display: grid;
     gap: 24px;
+
     .form-group {
         position: relative;
-        .error{
+
+        .error {
             position: absolute;
             color: #D20037;
             font-size: 12px;
@@ -37,17 +44,21 @@ form {
             left: 0;
         }
 
-       
+
     }
-    .form-group:has(.error){
+
+    .form-group:has(.error) {
         margin-bottom: 32px;
-        input{
+
+        input {
             border: 1px solid #D20037;
         }
-        label{
+
+        label {
             color: #D20037;
         }
     }
+
     .form-group label {
         position: absolute;
         left: 15px;
@@ -83,20 +94,21 @@ form {
 
     .form-group.focused label {
         top: 0px;
-        font-size: 12px;
+        font-size: 12px !important;
 
     }
 
     .form-group:has(select)>label {
         top: 0px;
-        font-size: 12px;
-    }
-    input:not(:placeholder-shown)+label {
-        top: 0px;
-        font-size: 12px;
+        font-size: 12px !important;
     }
 
-    button{
+    input:not(:placeholder-shown)+label {
+        top: 0px;
+        font-size: 12px !important;
+    }
+
+    button {
         outline: none;
         border: none;
         background-color: #0A0A0A;
@@ -108,9 +120,10 @@ form {
         justify-content: center;
         gap: 8px;
         border-radius: 12px;
+
         @media (min-width: 600px) {
             max-width: 198px;
-          }
+        }
 
     }
 }
@@ -146,7 +159,7 @@ form {
 
 }
 
-.subscription-box{
+.subscription-box {
     background-color: #F5F5F5;
     padding: 16px;
     display: grid;
@@ -155,25 +168,27 @@ form {
 
     border-radius: 12px;
     grid-template-columns: auto 1fr;
-    align-items:start;
+    align-items: start;
 }
 
 
-.tnc-wrapper{
+.tnc-wrapper {
     font-size: 12px;
     font-weight: 400;
     color: #595959;
-    a{
+
+    a {
         color: #1733B6;
     }
 }
 
-.responsive-form{
+.responsive-form {
     display: grid;
     grid-template-columns: 1fr;
     gap: 24px;
-margin-bottom: 24px;
-    @media (min-width: 920px) {
+    margin-bottom: 24px;
+
+    @media (min-width: 1200px) {
         grid-template-columns: 1fr 1fr;
-      }
+    }
 }
