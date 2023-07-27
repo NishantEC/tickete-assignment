@@ -1,0 +1,16 @@
+.ConfirmAndPay-container {
+    display: grid;
+
+
+    > .header {
+        font-size: 32px;
+        font-weight: 600;
+        border-bottom: none;
+    }
+
+    > div{
+        border-bottom: 0.075rem solid #D6D6D6;
+        padding: 24px;
+
+    }
+}

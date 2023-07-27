@@ -1,0 +1,139 @@
+.ticket-details-container {
+    display: grid;
+    grid-gap: 24px;
+}
+
+.details-container {
+    display: grid;
+
+    grid-gap: 24px;
+    border-bottom: 0.075rem solid #D6D6D6;
+    padding-bottom: 24px;
+
+    .venue-details {
+        display: grid;
+        grid-gap: 16px;
+        img {
+            width: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .name {
+            font-size: 18px;
+            font-weight: 600;
+        }
+    }
+
+    .ticket-details {
+        display: grid;
+        gap: 18px;
+
+        .variant,
+        .date,
+        .time {
+            font-size: 14px;
+            font-weight: 600;
+        }
+    }
+
+
+}
+
+.pax-container {
+    display: grid;
+    grid-gap: 16px;
+
+    .title {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .pax-details {
+        display: grid;
+        grid-gap: 16px;
+
+        .pax,
+        .fee,
+        .discount {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 400;
+
+            >div:nth-child(1) {
+                display: flex;
+                grid-gap: 4px;
+
+            }
+
+        }
+    }
+
+    .discount {
+        color: #006642;
+    }
+}
+
+.promocode-wrapper {
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 16px 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.075rem solid #D6D6D6;
+    border-top: 0.075rem solid #D6D6D6;
+
+    >div:nth-child(1) {
+        color: #006642;
+        cursor: pointer;
+
+    }
+
+    button {
+        color: #595959;
+        text-decoration: underline;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+}
+
+.total-container{
+    display: grid;
+    grid-gap: 8px;
+    .total-wrapper {
+            display: flex;
+            justify-content: space-between;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    
+    .currency-type {
+        color: #595959;
+        font-size: 12px;
+    font-weight: 400;
+    text-decoration: underline;
+    }
+}
+
+.info-box{
+    background-color: #F5F5F5;
+    padding: 16px;
+    display: grid;
+    grid-gap: 4px;
+    font-size: 12px;
+    border-radius: 12px;
+    .title{
+    color: #474747;
+font-weight: 600;
+    }
+    .info{
+        color: #595959;
+font-weight: 400;
+    }
+}

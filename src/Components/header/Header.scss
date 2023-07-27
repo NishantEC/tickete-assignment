@@ -1,0 +1,26 @@
+header{
+    padding: 20px 24px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+
+    background-color: #ffffff90;
+    backdrop-filter: blur(10px);
+    img{
+        width: 28px;
+        height: 28px;
+    }
+    transition: all 0.3s ease-in-out;
+
+    &.visible {
+        top: 0;
+      }
+      
+      &.hidden {
+        top: -80px; 
+      }
+}
+
+
+

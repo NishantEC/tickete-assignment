@@ -1,0 +1,40 @@
+.ticketepromises-container{
+    border: none !important;
+    display: grid;
+    gap: 24px;
+    .header {
+        color:  #474747;
+font-size: 18px;
+font-weight: 600;
+    }
+
+    .promises{
+        display: grid;
+        gap:24px;
+        .promise{
+            display: grid;
+            gap: 8px;
+            grid-template-columns: auto 1fr;
+
+            .icon{
+                width: 24px;
+                height: 24px;
+            }
+
+            .promise-content{
+                display: grid;
+                gap: 4px;
+                .head{
+                    color:  #474747;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+                .subhead{
+                    color:  #595959;
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}

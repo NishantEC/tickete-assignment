@@ -1,0 +1,142 @@
+.ticketbooking-container {
+    display: grid;
+    gap: 24px;
+
+    color: #474747;
+
+    .header {
+        font-size: 18px;
+        font-weight: 600;
+
+    }
+
+    .subheading {
+        font-size: 14px;
+        font-weight: 400;
+        margin-top: -18px;
+
+
+    }
+}
+
+form {
+    display: grid;
+    gap: 24px;
+    .form-group {
+        position: relative;
+        margin-bottom: 20px;
+
+        .error{
+            position: absolute;
+            color: #D20037;
+            font-size: 12px;
+            font-weight: 400;
+            bottom: -20px;
+            left: 0;
+        }
+
+       
+    }
+    .form-group:has(.error){
+        margin-bottom: 32px;
+        input{
+            border: 1px solid #D20037;
+        }
+        label{
+            color: #D20037;
+        }
+    }
+    .form-group label {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        transition: all 0.2s ease;
+        color: #595959;
+        background-color: #fff;
+        padding: 2px 4px;
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    input,
+    select {
+        width: 100%;
+
+        padding: 16px 20px;
+        border: 1px solid #D6D6D6;
+        border-radius: 4px;
+        font-size: 16px;
+        border-radius: 12px;
+        outline: none;
+
+        &:focus {
+            border: 1px solid #252525;
+        }
+
+
+    }
+
+
+    .form-group.focused label {
+        top: 0px;
+        font-size: 12px;
+
+    }
+
+    .form-group:has(select)>label {
+        top: 0px;
+        font-size: 12px;
+    }
+    input:not(:placeholder-shown)+label {
+        top: 0px;
+        font-size: 12px;
+    }
+
+    button{
+        outline: none;
+        border: none;
+        background-color: #0A0A0A;
+        color: #FFFFFF;
+
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 12px;
+
+    }
+}
+
+
+
+.payment-option {
+    border-bottom: 0.075rem solid #D6D6D6;
+
+    .option-wrapper {
+        display: grid;
+
+        gap: 8px;
+        grid-template-columns: 1fr auto;
+        padding: 24px 0;
+
+        >div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #474747;
+
+        }
+    }
+}
+
+.klarna-form {
+    @extend .header;
+    padding: 24px 0;
+
+
+}
