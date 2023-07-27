@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import "./TicketBooking.scss";
 import cardIcon from "../../assets/icons/CreditCard.svg";
 import klarnaIcon from "../../assets/icons/Klarna.svg";
@@ -54,6 +54,7 @@ const TicketBooking = (total: TotalAmount) => {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
     const { id, value } = e.target;
     setFormdata((prevData) => ({
       ...prevData,
@@ -87,103 +88,10 @@ const TicketBooking = (total: TotalAmount) => {
     setErrors(errorsCopy);
 
     const parentElement = e.target.parentNode;
-    if (parentElement instanceof HTMLElement) {
+    if (parentElement instanceof HTMLElement && value.trim() === "") {
       parentElement.classList.remove("focused");
     }
   };
-
-
-  const CreditCardForm = () => {
-    return (
-      <div className="responsive-form">
-        <div className="form-group">
-          <label htmlFor="cardNumber">Card Number</label>
-          <input
-            type="text"
-            id="cardNumber"
-            name="cardNumber"
-            placeholder=" "
-            value={formdata.cardNumber || ""}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-          />
-          {errors.cardNumber && <span className="error">{errors.cardNumber}</span>}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="nameOnCard">Name on Card</label>
-          <input
-            type="text"
-            id="nameOnCard"
-            name="nameOnCard"
-            placeholder=" "
-            value={formdata.nameOnCard || ""}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-          />
-          {errors.nameOnCard && <span className="error">{errors.nameOnCard}</span>}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="expirationDate">Expiration Date</label>
-          <input
-            type="text"
-            id="expirationDate"
-            name="expirationDate"
-            placeholder=" "
-            value={formdata.expirationDate || ""}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-          />
-          {errors.expirationDate && <span className="error">{errors.expirationDate}</span>}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="cvv">CVV</label>
-          <input
-            type="text"
-            id="cvv"
-            name="cvv"
-            placeholder=" "
-            value={formdata.cvv || ""}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-          />
-          {errors.cvv && <span className="error">{errors.cvv}</span>}
-        </div>
-      </div>
-    );
-  };
-
-  const KlarnaForm = () => {
-    return <div className="klarna-form">No Design was Given</div>;
-  };
-
-  const handlePaymentChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setPaymentMethod(e.target.value);
-    },
-    []
-  );
-
-  const paymentOptions = [
-    {
-      name: "card",
-      icon: cardIcon,
-      label: "Credit & debit card",
-      component: <CreditCardForm />,
-    },
-    {
-      name: "klarna",
-      icon: klarnaIcon,
-      label: "Klarna",
-      component: <KlarnaForm />,
-    },
-  ];
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -195,8 +103,8 @@ const TicketBooking = (total: TotalAmount) => {
     <div className="ticketbooking-container">
       <div className="header">Enter your details</div>
       <div className="subheading">
-        We'll be sending your tickets to the details below. Booking for a friend?
-        Add their details.
+        We'll be sending your tickets to the details below. Booking for a
+        friend? Add their details.
       </div>
 
       <form className="form" onSubmit={handleSubmit}>
@@ -241,7 +149,9 @@ const TicketBooking = (total: TotalAmount) => {
               onBlur={handleBlur}
             />
             <label htmlFor="confirmEmail">Confirm Email</label>
-            {errors.confirmEmail && <span className="error">{errors.confirmEmail}</span>}
+            {errors.confirmEmail && (
+              <span className="error">{errors.confirmEmail}</span>
+            )}
           </div>
           <div className="form-group">
             <input
@@ -276,7 +186,9 @@ const TicketBooking = (total: TotalAmount) => {
               onBlur={handleBlur}
             />
             <label htmlFor="additionalName">Name</label>
-            {errors.additionalName && <span className="error">{errors.additionalName}</span>}
+            {errors.additionalName && (
+              <span className="error">{errors.additionalName}</span>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="selectedOption">DropDown</label>
@@ -291,31 +203,127 @@ const TicketBooking = (total: TotalAmount) => {
               <option value="Option 2">Option 2</option>
               <option value="Option 3">Option 3</option>
             </select>
-            {errors.selectedOption && <span className="error">{errors.selectedOption}</span>}
+            {errors.selectedOption && (
+              <span className="error">{errors.selectedOption}</span>
+            )}
           </div>
         </div>
 
         <div className="header">Select your mode of payment</div>
-        <div className="subheading">Payments with Tickete are secure and encrypted.</div>
+        <div className="subheading">
+          Payments with Tickete are secure and encrypted.
+        </div>
         <div className="payment-options">
-          {paymentOptions.map((option) => (
-            <div key={option.name} className="payment-option">
-              <div className="option-wrapper" onClick={() => setPaymentMethod(option.name)}>
-                <div>
-                  <img src={option.icon} alt="" />
-                  <span>{option.label}</span>
-                </div>
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  value={option.name}
-                  checked={paymentMethod === option.name}
-                  onChange={handlePaymentChange}
-                />
+          <div key="card" className="payment-option">
+            <div
+              className="option-wrapper"
+              onClick={() => setPaymentMethod("card")}
+            >
+              <div>
+                <img src={cardIcon} alt="" />
+                <span>Credit & debit card</span>
               </div>
-              {paymentMethod === option.name ? option.component : null}
+              <input
+                type="radio"
+                name="paymentMethod"
+                value="card"
+                checked={paymentMethod === "card"}
+                onChange={() => setPaymentMethod("card")}
+              />
             </div>
-          ))}
+{
+              paymentMethod === "card" ? (
+                <div className="responsive-form">
+                <div className="form-group">
+                  <input
+                    type="text"
+                    id="cardNumber"
+                    name="cardNumber"
+                    placeholder=" "
+                    value={formdata.cardNumber}
+                    onChange={handleChange}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                  />
+                  <label htmlFor="cardNumber">Card Number</label>
+                  {errors.cardNumber && (
+                    <span className="error">{errors.cardNumber}</span>
+                  )}
+                </div>
+  
+                <div className="form-group">
+                  <input
+                    type="text"
+                    id="nameOnCard"
+                    name="nameOnCard"
+                    placeholder=" "
+                    value={formdata.nameOnCard}
+                    onChange={handleChange}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                  />
+                  <label htmlFor="nameOnCard">Name on Card</label>
+                  {errors.nameOnCard && (
+                    <span className="error">{errors.nameOnCard}</span>
+                  )}
+                </div>
+  
+                <div className="form-group">
+                  <input
+                    type="text"
+                    id="expirationDate"
+                    name="expirationDate"
+                    placeholder=" "
+                    value={formdata.expirationDate}
+                    onChange={handleChange}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                  />
+                  <label htmlFor="expirationDate">Expiration Date</label>
+                  {errors.expirationDate && (
+                    <span className="error">{errors.expirationDate}</span>
+                  )}
+                </div>
+  
+                <div className="form-group">
+                  <input
+                    type="text"
+                    id="cvv"
+                    name="cvv"
+                    placeholder=" "
+                    value={formdata.cvv}
+                    onChange={handleChange}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                  />
+                  <label htmlFor="cvv">CVV</label>
+                  {errors.cvv && <span className="error">{errors.cvv}</span>}
+                </div>
+              </div>
+              ):null
+}
+          </div>
+          <div key="klarna" className="payment-option">
+            <div
+              className="option-wrapper"
+              onClick={() => setPaymentMethod("klarna")}
+            >
+              <div>
+                <img src={klarnaIcon} alt="" />
+                <span>Klarna</span>
+              </div>
+              <input
+                type="radio"
+                name="paymentMethod"
+                value="klarna"
+                checked={paymentMethod === "klarna"}
+                onChange={() => setPaymentMethod("klarna")}
+              />
+            </div>
+            {paymentMethod === "klarna" ? (
+              <div className="klarna-form">No Design was Given</div>
+            ) : null}
+          </div>
         </div>
         <div className="total-container">
           <div className="total-wrapper">
@@ -327,14 +335,19 @@ const TicketBooking = (total: TotalAmount) => {
 
         <div className="subscription-box">
           <input type="radio" name="subscription" id="subscription" />
-<label htmlFor="subscription">       {" Receive travel tips, suggestions and offers in <city> by email"}</label>
+          <label htmlFor="subscription">
+            {" "}
+            {" Receive travel tips, suggestions and offers in <city> by email"}
+          </label>
         </div>
         <div className="tnc-wrapper">
-        With payment, you agree to the general <a href="/">terms and conditions of Tickete</a> & the <a href="/">activity provider</a>.
+          With payment, you agree to the general{" "}
+          <a href="/">terms and conditions of Tickete</a> & the{" "}
+          <a href="/">activity provider</a>.
         </div>
 
         <button type="submit">
-        Confirm and pay
+          Confirm and pay
           <svg
             width="24"
             height="24"
