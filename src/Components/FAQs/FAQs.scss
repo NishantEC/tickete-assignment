@@ -1,10 +1,11 @@
 .faqs-container {
     display: grid;
     gap: 24px;
+
     .header {
-        color:  #474747;
-font-size: 18px;
-font-weight: 600;
+        color: #474747;
+        font-size: 18px;
+        font-weight: 600;
     }
 
     .faqs {
@@ -21,16 +22,17 @@ font-weight: 600;
                 font-weight: 600;
                 display: flex;
                 justify-content: space-between;
-                svg{
+
+                svg {
                     transition: all 0.2s ease;
 
                 }
 
-                svg.active{
+                svg.active {
                     rotate: 180deg;
 
-                    .line{
-rotate: 90deg;
+                    .line {
+                        rotate: 90deg;
                     }
                 }
             }
@@ -53,20 +55,24 @@ rotate: 90deg;
         gap: 24px;
         font-size: 12px;
         border-radius: 12px;
-        >div{
+
+        >div {
             display: flex;
-            >div{
-                >div:nth-child(1){
+
+            >div {
+                >div:nth-child(1) {
                     font-size: 18px;
                     font-weight: 600;
                 }
-                >div:nth-child(2){
+
+                >div:nth-child(2) {
                     font-size: 14px;
                     font-weight: 400;
                 }
             }
         }
-        button{
+
+        button {
             width: fit-content;
             padding: 12px 24px;
             border: none;
@@ -76,7 +82,7 @@ rotate: 90deg;
             color: #7F2D0F;
             border: 2px solid #7F2D0F;
             font-size: 16px;
-font-weight: 600;
+            font-weight: 600;
         }
 
     }
