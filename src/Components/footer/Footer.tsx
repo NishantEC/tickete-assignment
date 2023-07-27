@@ -9,7 +9,8 @@ const Footer = () => {
   return (
     <footer>
         <img src={logo} alt="logo"/>
-        <div className="scial-wrapper">
+<div className="links">
+<div className="scial-wrapper">
           <a href="/" >
             <img src={instagramLogo} alt="" />
           </a>
@@ -24,6 +25,7 @@ const Footer = () => {
         <div className="disclaimer">
         <a href="/">© Tickete Inc.</a> • <a href="">Privacy</a> • <a href="">Terms</a> • <a href="">Cancellation</a>
         </div>
+</div>
 
     </footer>
   )

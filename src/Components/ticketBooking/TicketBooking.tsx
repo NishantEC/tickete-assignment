@@ -95,7 +95,7 @@ const TicketBooking = (total: TotalAmount) => {
 
   const CreditCardForm = () => {
     return (
-      <>
+      <div className="responsive-form">
         <div className="form-group">
           <label htmlFor="cardNumber">Card Number</label>
           <input
@@ -155,7 +155,7 @@ const TicketBooking = (total: TotalAmount) => {
           />
           {errors.cvv && <span className="error">{errors.cvv}</span>}
         </div>
-      </>
+      </div>
     );
   };
 
@@ -200,7 +200,7 @@ const TicketBooking = (total: TotalAmount) => {
       </div>
 
       <form className="form" onSubmit={handleSubmit}>
-        <div>
+        <div className="responsive-form">
           <div className="form-group">
             <input
               type="text"
@@ -263,7 +263,7 @@ const TicketBooking = (total: TotalAmount) => {
         <div className="subheading">
           We need a few more details to complete your reservation.
         </div>
-        <div>
+        <div className="responsive-form">
           <div className="form-group">
             <input
               type="text"
@@ -324,8 +324,17 @@ const TicketBooking = (total: TotalAmount) => {
           </div>
           <div className="currency-type">You will pay in {total.currency}</div>
         </div>
+
+        <div className="subscription-box">
+          <input type="radio" name="subscription" id="subscription" />
+<label htmlFor="subscription">       {" Receive travel tips, suggestions and offers in <city> by email"}</label>
+        </div>
+        <div className="tnc-wrapper">
+        With payment, you agree to the general <a href="/">terms and conditions of Tickete</a> & the <a href="/">activity provider</a>.
+        </div>
+
         <button type="submit">
-          Pay and Confirm
+        Confirm and pay
           <svg
             width="24"
             height="24"

@@ -1,16 +1,99 @@
 .ConfirmAndPay-container {
     display: grid;
 
+    grid-template-areas: "header "
+        "ticketOverview"
+        "ticketbooking"
+        "Faqs"
+        "ticketePromises";
 
-    > .header {
+    grid-template-columns: 1fr;
+    padding: 0;
+
+    @media (min-width: 768px) and (max-width: 992px) {
+        grid-template-areas: "header ticketOverview"
+            "ticketbooking ticketOverview"
+            "Faqs Faqs"
+            "ticketePromises ticketePromises";
+            gap: 0px;
+        grid-template-columns: 1fr 1fr;
+        padding: 32px;
+    }
+
+    @media (min-width: 992px){
+        grid-template-areas: "header header ticketOverview"
+            "ticketbooking ticketbooking ticketOverview"
+            "Faqs Faqs Faqs"
+            "ticketePromises ticketePromises ticketePromises";
+
+        grid-template-columns: 1fr 1fr 1fr;
+        padding: 48px;
+        gap: 0px;
+    }
+
+
+    >.header {
+        grid-area: header;
+        height: fit-content;
         font-size: 32px;
         font-weight: 600;
         border-bottom: none;
+        @media (min-width: 768px) and (max-width: 992px) {
+            font-size: 36px;
+            border-right: 0.075rem solid #D6D6D6;
+            
+        }
+    
+        @media (min-width: 992px){
+            font-size: 48px;
+            border-right: 0.075rem solid #D6D6D6;
+        }
+  
     }
 
-    > div{
+    >div {
         border-bottom: 0.075rem solid #D6D6D6;
         padding: 24px;
 
+    }
+
+    .ticketbooking-container {
+        grid-area: ticketbooking;
+        height: fit-content;
+
+        @media (min-width: 768px) {
+            border-right: 0.075rem solid #D6D6D6;
+            border-bottom: none;
+        }
+
+
+    }
+
+    .ticketOverview-container {
+        grid-area: ticketOverview;
+        height: fit-content;
+
+        @media (min-width: 768px) {
+            // border-left: 0.075rem solid #D6D6D6;
+            border-bottom: none;
+        }
+    }
+
+    .faqs-container {
+        grid-area: Faqs;
+        height: fit-content;
+
+        @media (min-width: 768px) {
+            border-top: 0.075rem solid #D6D6D6;
+        }
+    }
+
+    .ticketepromises-container {
+        grid-area: ticketePromises;
+        height: fit-content;
+
+        @media (min-width: 768px) {
+            border-top: 0.075rem solid #D6D6D6;
+        }
     }
 }

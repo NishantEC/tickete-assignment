@@ -1,4 +1,4 @@
-.ticket-details-container {
+.ticketOverview-container {
     display: grid;
     grid-gap: 24px;
 }
@@ -15,8 +15,9 @@
         grid-gap: 16px;
         img {
             width: 100%;
-            object-fit: contain;
+            object-fit: cover;
             border-radius: 12px;
+            max-height: 230px;
         }
 
         .name {
@@ -34,6 +35,14 @@
         .time {
             font-size: 14px;
             font-weight: 600;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 8px;
+            svg{
+                width: 24px;
+                height: 24px;
+
+            }
         }
     }
 
@@ -88,6 +97,10 @@
     >div:nth-child(1) {
         color: #006642;
         cursor: pointer;
+        display: flex;
+        grid-gap: 4px;
+        text-decoration: underline;
+        
 
     }
 

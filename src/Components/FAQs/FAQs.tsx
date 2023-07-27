@@ -1,4 +1,5 @@
 import { useState } from "react";
+import supportIcon from "../../assets/icons/ChatsCircle.svg";
 import "./FAQs.scss";
 
 type FAQ = {
@@ -68,17 +69,17 @@ const FAQs = () => {
             <path
               d="M12 5V19"
               stroke="#474747"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="line"
             ></path>
             <path
               d="M5 12H19"
               stroke="#474747"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></path>
           </svg>
         </div>
@@ -102,6 +103,7 @@ const FAQs = () => {
             <div>Need help?</div>
             <div>We're here to help you, talk to us.</div>
           </div>
+         <img src={supportIcon} alt="" />
         </div>
         <button>Chat with us</button>
       </div>

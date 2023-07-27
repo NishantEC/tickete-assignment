@@ -4,18 +4,42 @@ footer {
     display: grid;
     gap: 40px;
 
-    .scial-wrapper {
+    .links {
         display: flex;
-        gap: 16px;
-    }
+        gap: 40px;
+        flex-direction: column;
+        justify-content: flex-start;
 
-    .disclaimer {
-        color: #EBEBEB;
+        @media (min-width: 768px) {
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            border-top : 1px solid #474747;
+            padding-top: 24px;
+        }
 
-        a {
-            color: #EBEBEB;
-            font-size: 14px;
-            font-weight: 400;
+
+        .scial-wrapper {
+            display: flex;
+            gap: 16px;
+
+
+
+            @media (min-width: 768px) {
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+
+            }
+        }
+            .disclaimer {
+                color: #EBEBEB;
+
+                a {
+                    color: #EBEBEB;
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+            }
         }
     }
-}

@@ -1,14 +1,31 @@
 .faqs-container {
     display: grid;
     gap: 24px;
+    grid-template-areas: "header"
+        "faqs"
+        "helpbox";
+    grid-template-columns: 1fr;
+    @media (min-width: 768px) {
+        grid-template-areas: "header helpbox"
+            "faqs helpbox"
+        ;
+        grid-template-columns: 1fr auto;
+        column-gap: 64px;
+    }
 
     .header {
+        grid-area: header;
         color: #474747;
         font-size: 18px;
         font-weight: 600;
+        @media (min-width: 600px) {
+            font-size: 24px;
+          }
+
     }
 
     .faqs {
+        grid-area: faqs;
         display: grid;
 
         .faq {
@@ -48,6 +65,7 @@
     }
 
     .help-box {
+        grid-area: helpbox;
         background-color: #FFF7ED;
         color: #7F2D0F;
         padding: 16px;
@@ -55,10 +73,12 @@
         gap: 24px;
         font-size: 12px;
         border-radius: 12px;
-
+        width: fit-content;
+        height: fit-content;
         >div {
             display: flex;
-
+            justify-content: space-between;
+            gap: 16px;
             >div {
                 >div:nth-child(1) {
                     font-size: 18px;
@@ -80,9 +100,16 @@
             background: none;
             border-radius: 12px;
             color: #7F2D0F;
-            border: 2px solid #7F2D0F;
+            border: 1px solid #7F2D0F;
             font-size: 16px;
             font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            &:hover{
+                background-color: #7F2D0F;
+                color: #FFF7ED;
+
+            }
         }
 
     }
