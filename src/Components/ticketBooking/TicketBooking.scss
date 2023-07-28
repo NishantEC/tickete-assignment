@@ -120,6 +120,21 @@ form {
         justify-content: center;
         gap: 8px;
         border-radius: 12px;
+        border: 1px solid #0A0A0A;
+        transition: all 0.3s ease-in-out;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+
+
+        &:hover {
+            background-color: #FFFFFF;
+            color: #0A0A0A;
+            
+            svg{
+               filter : invert(1) ;
+            }
+        }
 
         @media (min-width: 600px) {
             max-width: 198px;
